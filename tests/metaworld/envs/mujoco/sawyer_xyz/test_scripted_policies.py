@@ -34,7 +34,7 @@ test_cases_latest_nonoise = [
     ['assembly-v1', SawyerAssemblyV1Policy(), .0, 1.],
     ['assembly-v2', SawyerAssemblyV2Policy(), .0, 1.],
     ['basketball-v1', SawyerBasketballV1Policy(), .0, .98],
-    ['basketball-v2', SawyerBasketballV1Policy(), .0, .98],
+    ['basketball-v2', SawyerBasketballV2Policy(), .0, .98],
     ['bin-picking-v2', SawyerBinPickingV2Policy(), .0, .98],
     ['box-close-v1', SawyerBoxCloseV1Policy(), .0, .85],
     ['box-close-v2', SawyerBoxCloseV2Policy(), .0, .90],
@@ -122,10 +122,10 @@ test_cases_latest_nonoise = [
 
 test_cases_latest_noisy = [
     # name, policy, action noise pct, success rate
-    ['assembly-v1', SawyerAssemblyV1Policy(), .1, .69],
-    ['assembly-v2', SawyerAssemblyV2Policy(), .1, .70],
-    ['basketball-v1', SawyerBasketballV1Policy(), .1, .97],
-    ['basketball-v2', SawyerBasketballV1Policy(), .1, .96],
+    # ['assembly-v1', SawyerAssemblyV1Policy(), .1, .69],
+    # ['assembly-v2', SawyerAssemblyV2Policy(), .1, .70],
+    # ['basketball-v1', SawyerBasketballV1Policy(), .1, .97],
+    ['basketball-v2', SawyerBasketballV2Policy(), .1, .96],
     ['bin-picking-v2', SawyerBinPickingV2Policy(), .1, .96],
     ['box-close-v1', SawyerBoxCloseV1Policy(), .1, .84],
     ['box-close-v2', SawyerBoxCloseV2Policy(), .1, .82],
@@ -257,6 +257,6 @@ def test_scripted_policy(env, policy, act_noise_pct, expected_success_rate, iter
 
     successes = 0
     for _ in range(iters):
-        successes += float(trajectory_summary(env, policy, act_noise_pct, render=False)[0])
+        successes += float(trajectory_summary(env, policy, act_noise_pct, render=True)[0])
     print(successes)
     assert successes >= expected_success_rate * iters
